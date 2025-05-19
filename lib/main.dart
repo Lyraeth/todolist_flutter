@@ -4,6 +4,7 @@ import 'package:local_auth/local_auth.dart';
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:todolist/service/auth/auth_service.dart';
 import 'package:todolist/service/home/home_service.dart';
+import 'package:todolist/service/noti_service.dart';
 import 'package:todolist/src/auth/login/page.dart';
 import 'package:todolist/src/auth/signup/page.dart';
 import 'package:todolist/src/dashboard/page.dart';
@@ -55,9 +56,14 @@ class _MyHomePageState extends State<MyHomePage> {
     _loadSession();
   }
 
+  Future<void> _initNotification() async {
+    await NotiService().init();
+  }
+
   @override
   void initState() {
     super.initState();
+    _initNotification();
     auth = LocalAuthentication();
     _loadSession();
   }
@@ -67,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
+        children: [
           if (_session == null)
             Column(
               children: [

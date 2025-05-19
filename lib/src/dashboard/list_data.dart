@@ -52,72 +52,70 @@ class _TasksDataState extends State<TasksData> {
         ? Center(child: CircularProgressIndicator())
         : _dataToDo.isEmpty
         ? const Center(child: Text("No tasks found"))
-        : Expanded(
-          child: ListView.builder(
-            padding: const EdgeInsets.all(10.0),
-            itemCount: _dataToDo.length,
-            itemBuilder: ((context, index) {
-              return Card(
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder:
-                            (context) => DetailTasks(
-                              taskData: {
-                                'id': _dataToDo[index]['id'],
-                                'task_detail': _dataToDo[index]['task_detail'],
-                                'note': _dataToDo[index]['note'],
-                              },
-                            ),
-                      ),
-                    );
-                  },
-                  child: ListTile(
-                    title: Text(
-                      _dataToDo[index]['task_detail'],
-                      style: TextStyle(fontWeight: FontWeight.w500),
+        : ListView.builder(
+          padding: const EdgeInsets.all(10.0),
+          itemCount: _dataToDo.length,
+          itemBuilder: ((context, index) {
+            return Card(
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder:
+                          (context) => DetailTasks(
+                            taskData: {
+                              'id': _dataToDo[index]['id'],
+                              'task_detail': _dataToDo[index]['task_detail'],
+                              'note': _dataToDo[index]['note'],
+                            },
+                          ),
                     ),
-                    subtitle: Text(_dataToDo[index]['note']),
-                    trailing: SizedBox(
-                      width: 96,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          IconButton(
-                            icon: Icon(Icons.edit, color: Colors.blue),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder:
-                                      (context) => EditTaksPage(
-                                        taskData: {
-                                          'id': _dataToDo[index]['id'],
-                                          'task_detail':
-                                              _dataToDo[index]['task_detail'],
-                                          'note': _dataToDo[index]['note'],
-                                        },
-                                      ),
-                                ),
-                              );
-                            },
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.delete, color: Colors.red),
-                            onPressed: () {
-                              _handleDelete(_dataToDo[index]['id'].toString());
-                            },
-                          ),
-                        ],
-                      ),
+                  );
+                },
+                child: ListTile(
+                  title: Text(
+                    _dataToDo[index]['task_detail'],
+                    style: TextStyle(fontWeight: FontWeight.w500),
+                  ),
+                  subtitle: Text(_dataToDo[index]['note']),
+                  trailing: SizedBox(
+                    width: 96,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.edit, color: Colors.blue),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (context) => EditTaksPage(
+                                      taskData: {
+                                        'id': _dataToDo[index]['id'],
+                                        'task_detail':
+                                            _dataToDo[index]['task_detail'],
+                                        'note': _dataToDo[index]['note'],
+                                      },
+                                    ),
+                              ),
+                            );
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.delete, color: Colors.red),
+                          onPressed: () {
+                            _handleDelete(_dataToDo[index]['id'].toString());
+                          },
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              );
-            }),
-          ),
+              ),
+            );
+          }),
         );
   }
 }

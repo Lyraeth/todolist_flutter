@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todolist/service/noti_service.dart';
 import 'package:todolist/service/tasks/tasks_service.dart';
 import 'package:todolist/src/dashboard/page.dart';
 
@@ -17,6 +18,7 @@ class _CreateTasksInputState extends State<CreateTasksInput> {
 
   @override
   void initState() {
+    NotiService().init();
     super.initState();
   }
 
@@ -33,9 +35,11 @@ class _CreateTasksInputState extends State<CreateTasksInput> {
 
     final success = await TasksService.storeTasks(taskDetail, note);
     if (success) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Task berhasil dibuat')));
+      NotiService().showInstantNotification(
+        id: 0,
+        title: "ToDoList",
+        body: "a new to do for you",
+      );
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => DashboardPage()),

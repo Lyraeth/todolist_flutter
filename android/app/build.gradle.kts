@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.todolist"
-    compileSdk = 35
+    compileSdk = flutter.compileSdkVersion
     ndkVersion = "29.0.13113456"
 
     compileOptions {
@@ -45,6 +45,10 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+}
+
+dependencies {
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
 }
 
 flutter {
