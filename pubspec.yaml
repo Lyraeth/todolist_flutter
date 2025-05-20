@@ -14,7 +14,8 @@ dependencies:
     shadcn_flutter: ^0.0.36
     intl: ^0.20.2
     local_auth: ^2.3.0
-    flutter_local_notifications: ^19.2.0
+    flutter_local_notifications: ^19.2.1
+    timezone: ^0.10.1
 
 dev_dependencies:
     flutter_test:
