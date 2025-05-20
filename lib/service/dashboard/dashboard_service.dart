@@ -4,6 +4,11 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
 class DashboardService {
+  static Future getUserLogin() async {
+    final storage = FlutterSecureStorage();
+    return await storage.read(key: 'name');
+  }
+
   static Future getToDo() async {
     final storage = FlutterSecureStorage();
     final token = await storage.read(key: "token");

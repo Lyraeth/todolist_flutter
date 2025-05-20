@@ -1,5 +1,6 @@
 import 'package:shadcn_flutter/shadcn_flutter.dart';
 import 'package:todolist/main.dart';
+import 'package:todolist/service/dashboard/dashboard_service.dart';
 import 'package:todolist/src/dashboard/list_layout.dart';
 import 'package:todolist/src/settings/page.dart';
 
@@ -11,7 +12,21 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
+  String? name;
   int selected = 0;
+
+  Future _handleUser() async {
+    final nameUser = await DashboardService.getUserLogin();
+    setState(() {
+      name = nameUser;
+    });
+  }
+
+  @override
+  void initState() {
+    _handleUser();
+    super.initState();
+  }
 
   NavigationRailAlignment alignment = NavigationRailAlignment.start;
   NavigationLabelType labelType = NavigationLabelType.none;
@@ -40,7 +55,7 @@ class _DashboardPageState extends State<DashboardPage> {
       headers: [
         AppBar(
           title: const Text("Todolist"),
-          subtitle: const Text("Your To Do"),
+          subtitle: Text(selected == 0 ? "Your to do" : "Settings"),
           leading: [
             OutlineButton(
               density: ButtonDensity.icon,
@@ -55,6 +70,7 @@ class _DashboardPageState extends State<DashboardPage> {
               child: const Icon(Icons.arrow_back),
             ),
           ],
+          trailing: [Text(name ?? '', style: TextStyle(fontSize: 15))],
         ),
       ],
       child: Row(
